@@ -13,7 +13,7 @@ import imageRoutes from './routes/imageRoutes';
 
 dotenv.config();
 
-const whiteList = ['http://localhost:3001'];
+const whiteList = ['http://localhost:3000'];
 const corsOptions = {
   origin(origin, callback) {
     if (whiteList.indexOf(origin) !== -1 || !origin) {
