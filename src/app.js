@@ -41,7 +41,7 @@ class App {
   }
 
   routes() {
-    this.app.use(cors());
+    this.app.use(cors(corsOptions));
     this.app.use(helmet());
     this.app.use('/', homeRoutes);
     this.app.use('/users/', userRoutes);
