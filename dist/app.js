@@ -49,15 +49,19 @@ class App {
     this.app.use('/alunos/', _alunoRoutes2.default);
     this.app.use('/images/', _imageRoutes2.default);
     // Add Access-Control-Allow-Headers
-    this.app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-      res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept',
-      );
-      next();
-    });
+    // this.app.use((req, res, next) => {
+    //   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    //   res.header(
+    //     'Access-Control-Allow-Headers',
+    //     'Origin, X-Requested-With, Content-Type, Accept',
+    //   );
+    //   next();
+    // });
   }
 }
 
 exports. default = new App().app;
+
+// fetch('https://node-api-alunos.onrender.com/alunos')
+//   .then((response) => response.json())
+//   .then((alunos) => console.log(alunos));
