@@ -3,8 +3,8 @@ import { resolve } from 'path';
 import './database';
 
 import express from 'express';
-// import cors from 'cors';
-// import helmet from 'helmet';
+import cors from 'cors';
+import helmet from 'helmet';
 import homeRoutes from './routes/homeRoutes';
 import userRoutes from './routes/userRoutes';
 import tokenRoutes from './routes/tokenRoutes';
@@ -13,16 +13,16 @@ import imageRoutes from './routes/imageRoutes';
 
 dotenv.config();
 
-// const whiteList = ['http://localhost:3000', 'https://www.google.com.br'];
-// const corsOptions = {
-//   origin(origin, callback) {
-//     if (whiteList.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// };
+const whiteList = ['http://localhost:3000', 'https://www.google.com.br'];
+const corsOptions = {
+  origin(origin, callback) {
+    if (whiteList.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
 
 class App {
   constructor() {
@@ -41,8 +41,8 @@ class App {
   }
 
   routes() {
-    // this.app.use(cors(corsOptions));
-    // this.app.use(helmet());
+    this.app.use(cors(corsOptions));
+    this.app.use(helmet());
     this.app.use('/', homeRoutes);
     this.app.use('/users/', userRoutes);
     this.app.use('/tokens/', tokenRoutes);
@@ -50,7 +50,7 @@ class App {
     this.app.use('/images/', imageRoutes);
     // Add Access-Control-Allow-Headers
     this.app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
       res.header(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept',
