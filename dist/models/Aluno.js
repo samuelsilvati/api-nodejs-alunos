@@ -28,7 +28,7 @@
           type: _sequelize2.default.STRING,
           defaultValue: '',
           unique: {
-            msg: 'Email já cadastrado',
+            msg: 'E-mail já cadastrado',
           },
           validate: {
             isEmail: {
