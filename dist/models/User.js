@@ -1,59 +1,48 @@
-Object.defineProperty(exports, '__esModule', { value: true });
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
-const _sequelize = require('sequelize');
+"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }var _sequelize = require('sequelize'); var _sequelize2 = _interopRequireDefault(_sequelize);
+var _bcryptjs = require('bcryptjs'); var _bcryptjs2 = _interopRequireDefault(_bcryptjs);
 
-const _sequelize2 = _interopRequireDefault(_sequelize);
-const _bcryptjs = require('bcryptjs');
-
-const _bcryptjs2 = _interopRequireDefault(_bcryptjs);
-
-class User extends _sequelize.Model {
+ class User extends _sequelize.Model {
   static init(sequelize) {
-    super.init(
-      {
-        nome: {
-          type: _sequelize2.default.STRING,
-          defaultValue: '',
-          validate: {
-            len: {
-              args: [3, 255],
-              msg: 'Campo nome deve ter entre 3 e 255 caracteres',
-            },
-          },
-        },
-        email: {
-          type: _sequelize2.default.STRING,
-          defaultValue: '',
-          unique: {
-            msg: 'E-mail já existe',
-          },
-          validate: {
-            isEmail: {
-              msg: 'E- mail inválido',
-            },
-          },
-        },
-        password_hash: {
-          type: _sequelize2.default.STRING,
-          defaultValue: '',
-        },
-        password: {
-          type: _sequelize2.default.VIRTUAL,
-          defaultValue: '',
-          validate: {
-            len: {
-              args: [6, 50],
-              msg: 'A senha precisa ter entre 6 e 50 caracteres',
-            },
+    super.init({
+      nome: {
+        type: _sequelize2.default.STRING,
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [3, 255],
+            msg: 'Campo nome deve ter entre 3 e 255 caracteres',
           },
         },
       },
-      {
-        sequelize,
+      email: {
+        type: _sequelize2.default.STRING,
+        defaultValue: '',
+        unique: {
+          msg: 'Email já existe',
+        },
+        validate: {
+          isEmail: {
+            msg: 'Email inválido',
+          },
+        },
       },
-    );
+      password_hash: {
+        type: _sequelize2.default.STRING,
+        defaultValue: '',
+      },
+      password: {
+        type: _sequelize2.default.VIRTUAL,
+        defaultValue: '',
+        validate: {
+          len: {
+            args: [6, 50],
+            msg: 'A senha precisa ter entre 6 e 50 caracteres',
+          },
+        },
+      },
+    }, {
+      sequelize,
+    });
 
     this.addHook('beforeSave', async (user) => {
       if (user.password) {
@@ -67,5 +56,4 @@ class User extends _sequelize.Model {
   passwordIsValid(password) {
     return _bcryptjs2.default.compare(password, this.password_hash);
   }
-}
-exports.default = User;
+} exports.default = User;
