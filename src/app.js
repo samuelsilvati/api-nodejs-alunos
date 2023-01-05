@@ -13,7 +13,10 @@ import imageRoutes from './routes/imageRoutes';
 
 dotenv.config();
 
-const whiteList = ['http://localhost:3000', 'https://www.google.com.br'];
+const whiteList = [
+  'https://node-app-alunos.netlify.app/',
+  'https://www.google.com.br',
+];
 const corsOptions = {
   origin(origin, callback) {
     if (whiteList.indexOf(origin) !== -1 || !origin) {
