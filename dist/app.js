@@ -13,7 +13,7 @@ var _imageRoutes = require('./routes/imageRoutes'); var _imageRoutes2 = _interop
 
 _dotenv2.default.config();
 
-const whiteList = ['https://node-app-alunos.netlify.app'];
+const whiteList = [process.env.FRONTEND_URL];
 const corsOptions = {
   origin(origin, callback) {
     if (whiteList.indexOf(origin) !== -1 || !origin) {
