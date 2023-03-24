@@ -14,7 +14,7 @@ class AlunoController {
         'altura',
       ],
       order: [
-        ['id', 'DESC'],
+        ['nome', 'ASC'], // Ordena a lista de alunos em ordem alfabética
         [Image, 'id', 'DESC'],
       ], // Ordena os alunos e imagens
       include: {
