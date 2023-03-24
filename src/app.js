@@ -5,6 +5,8 @@ import './database';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import delay from 'express-delay';
 import homeRoutes from './routes/homeRoutes';
 import userRoutes from './routes/userRoutes';
 import tokenRoutes from './routes/tokenRoutes';
@@ -13,7 +15,7 @@ import imageRoutes from './routes/imageRoutes';
 
 dotenv.config();
 
-const whiteList = ['https://node-app-alunos.netlify.app'];
+const whiteList = [process.env.FRONTEND_URL];
 const corsOptions = {
   origin(origin, callback) {
     if (whiteList.indexOf(origin) !== -1 || !origin) {
@@ -43,6 +45,7 @@ class App {
   routes() {
     this.app.use(cors(corsOptions));
     this.app.use(helmet());
+    this.app.use(delay(200));
     this.app.use('/', homeRoutes);
     this.app.use('/users/', userRoutes);
     this.app.use('/tokens/', tokenRoutes);
